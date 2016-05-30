@@ -20,7 +20,11 @@
     <!-- Latest version of Knockout JS -->
     <script type= "text/javascript" src="js/knockout-3.4.0.js"></script>
 
-    <script src= "https://maps.googleapis.com/maps/api/js?key=AIzaSyDZqT7WKRP29IZHMwHIyB2zYluNNXf4kJs"></script>
+    <script src= 'js/main.js'></script>
+
+    <script src= "https://maps.googleapis.com/maps/api/js?key=AIzaSyDZqT7WKRP29IZHMwHIyB2zYluNNXf4kJs&callback=initMap" async></script>
+
+
 
     <!-- Custom Styling -->
     <style>
@@ -33,6 +37,9 @@
       }
       .btn-group {
         margin: 8px;
+      }
+      #map {
+        height: 85%;
       }
     </style>
 
