@@ -1,7 +1,9 @@
+// Global Variables //
 var infowindow,
     markerArray = [],
     filteredLocations = []
 
+// Callback function for Google Maps //
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
   center: {lat: 61.193580, lng: -149.904546},
@@ -13,6 +15,7 @@ function initMap() {
   ko.applyBindings(new ViewModel());
 };
 
+// Data for Locations //
 var locations = [
   {
     title: "Tommy's Burger Stop",
@@ -253,11 +256,14 @@ var ViewModel = function() {
     if (type === 'coffee') {
       filter(locations, type);
       makingMarkers(filteredLocations);
+      console.log('clicked coffee filter');
     } if (type === 'restaurant') {
       filter(locations, type);
       makingMarkers(filteredLocations);
+      console.log('clicked restaurant filter');
     } if (type === 'all') {
       makingMarkers(locations);
+      console.log('pressed all filter');
     }
 
     function filter(locationData, type) {

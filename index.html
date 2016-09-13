@@ -28,7 +28,7 @@
         margin: 0;
         border: 0;
       }
-      .btn-group {
+      #menuBtn {
         margin: 8px;
       }
       #map {
@@ -126,11 +126,17 @@
       <div class= 'container-fluid'>
 
         <!-- Menu Button, Used to toggle list of Landmarks-->
-        <div class= 'btn-group'>
-          <button type= 'button' class= 'btn dropdown-toggle' data-toggle= 'dropdown' aria-label= 'Menu Button'>
+        <div class= 'dropdown'>
+          <button type= 'button' id= 'menuBtn' class= 'button' data-toggle= 'dropdown' aria-haspopup= 'true' aria-expanded= 'false'>
             <span class= 'glyphicon glyphicon-menu-hamburger'>
             </span>
           </button>
+          <ul class= 'dropdown-menu' aria-labelledby= 'dLabel'>
+            <button id= 'coffee' data-bind= 'click: function() {this.typeButton("coffee")}'>Coffee</button>
+            <button id= 'restaurant' data-bind= 'click: function() {this.typeButton("restaurant")}'>Restaurants</button>
+            <button id= 'all' data-bind= 'click: function() {this.typeButton("all")}'>All</button>
+            <li>test content</li>
+          </ul>
         </div>
       </div>
     </nav>
