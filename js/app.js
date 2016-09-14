@@ -1,7 +1,7 @@
 // Global Variables //
 var infowindow,
-    markerArray = [],
-    filteredLocations = []
+    markerArray = []
+
 
 // Callback function for Google Maps //
 function initMap() {
@@ -249,6 +249,8 @@ var ViewModel = function() {
 
   this.typeButton = function(type) {
 
+    var filteredLocations = [];
+
     self.allLocations.removeAll();
 
     removeMarkers();
@@ -285,7 +287,7 @@ var ViewModel = function() {
           markerArray[i].setMap(null);
       }
       markerArray = [];
-  }
+  };
 
   function makingMarkers(locationData, type) {
 

@@ -40,7 +40,8 @@
   <body>
 
     <!-- Test Facebook Intergration via Login-->
-    <script>
+
+    <!--<script>
       // This is called with the results from from FB.getLoginStatus().
       function statusChangeCallback(response) {
         console.log('statusChangeCallback');
@@ -119,7 +120,7 @@
           document.getElementById('status').innerHTML = 'Thanks for logging in, ' + response.name + '!';
         });
       }
-    </script>
+    </script> -->
 
     <!-- This is the Top Nav Bar, where the search and menu button reside -->
     <nav class= 'navbar navbar-default'>
@@ -135,7 +136,9 @@
             <button id= 'coffee' data-bind= 'click: function() {this.typeButton("coffee")}'>Coffee</button>
             <button id= 'restaurant' data-bind= 'click: function() {this.typeButton("restaurant")}'>Restaurants</button>
             <button id= 'all' data-bind= 'click: function() {this.typeButton("all")}'>All</button>
-            <li>test content</li>
+            <div data-bind= 'foreach: markerArray'>
+              <div data-bind= 'text: title'></div>
+            </div>
           </ul>
         </div>
       </div>
