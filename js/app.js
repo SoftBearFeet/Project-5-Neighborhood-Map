@@ -211,7 +211,7 @@ var locations = [
     long: -149.904385,
     latLng: {lat: 61.218038, lng: -149.904385},
     venueId: '4bea0424415e20a1719ee4bb',
-    type: 'coffee',
+    type: 'restaurant',
     fbUrl: 'https://www.facebook.com/SimonandSeaforts/'
 
   },
@@ -244,6 +244,8 @@ var markMarker = function(data, marker) {
 var ViewModel = function() {
 
   var self = this;
+
+  self.markerArray = ko.observableArray([]);
 
   this.allLocations = ko.observableArray([]);
 
@@ -311,7 +313,9 @@ var ViewModel = function() {
 
       markerArray.push(marker);
 
+      var test = self.allLocations;
       self.allLocations.push(new markMarker(locations, marker));
+      console.log(marker.title);
     };
   }
 
