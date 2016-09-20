@@ -260,14 +260,11 @@ var ViewModel = function() {
     if (type === 'coffee') {
       filter(locations, type);
       makingMarkers(filteredLocations);
-      console.log('clicked coffee filter');
     } if (type === 'restaurant') {
       filter(locations, type);
       makingMarkers(filteredLocations);
-      console.log('clicked restaurant filter');
     } if (type === 'all') {
       makingMarkers(locations);
-      console.log('pressed all filter');
     }
 
     function filter(locationData, type) {
@@ -313,9 +310,7 @@ var ViewModel = function() {
 
       markerArray.push(marker);
 
-      var test = self.allLocations;
       self.allLocations.push(new markMarker(locations, marker));
-      console.log(marker.title);
     };
   }
 
@@ -353,10 +348,6 @@ function markerClicked(marker, infowindow) {
 };
 
 function mainInfowindow(marker, infowindow) {
-
-  function logConsole(text) {
-    console.log('pushed button ' + text);
-  }
 
   marker.setAnimation(google.maps.Animation.BOUNCE);
   infowindow.open(map,marker);
