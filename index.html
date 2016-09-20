@@ -136,8 +136,8 @@
             <button id= 'coffee' data-bind= 'click: function() {this.typeButton("coffee")}'>Coffee</button>
             <button id= 'restaurant' data-bind= 'click: function() {this.typeButton("restaurant")}'>Restaurants</button>
             <button id= 'all' data-bind= 'click: function() {this.typeButton("all")}'>All</button>
-            <div data-bind= 'foreach: markerArray'>
-              <div data-bind= 'text: title'></div>
+            <div data-bind= 'foreach: allLocations'>
+              <div data-bind= 'text: marker.title'></div>
             </div>
           </ul>
         </div>
