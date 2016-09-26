@@ -348,46 +348,11 @@ function markerClicked(marker, infowindow) {
 };
 
 function mainInfowindow(marker, infowindow) {
-
   marker.setAnimation(google.maps.Animation.BOUNCE);
-  infowindow.open(map,marker);
-  var fbLink = marker.fb;
-  var fsId = marker.id;
-  var textFoursquare = 'this is text for foursquare'
-  var textFacebook = 'this is text for facebook';
-  //var radioGroup = '<div class="btn-group" data-toggle="buttons"><label class="btn btn-primary"><input type="radio" name="options" id="facebook" autocomplete="off">Facebook</label><label class="btn btn-primary"><input type="radio" name="options" id="foursquare" autocomplete="off">FourSquare</label></div><br>';
-  var collapseGroup = '<button class="btn btn-primary" type="button" data-toggle="collapse" data-parent="#selector" data-target="#divDataTarget" id="btFourSquare" aria-expanded="false" aria-controls="">FourSquare</button><button class="btn btn-primary" type="button" data-toggle="collapse" data-parent="#selector" data-target="#divDataTarget" id="btFacebook" aria-expanded="false" aria-controls="">Facebook</button><div id="divDataTarget" class="collapse" style="width:190px;"></div>'
-
-  infowindow.setContent(collapseGroup);
-
-  $('#btFourSquare').click(function(){
-    fourSquare(marker, infowindow);
-  });
-  $('#btFacebook').click(function(){
-    facebookData(marker);
-  })
-}
-
-function facebookData(marker) {
-  var divDataTarget = $('#divDataTarget');
-  var getDataTarget = $('#getFbData').get(0);
-  divDataTarget.append('<div class="fb-page" data-href="https://www.facebook.com/moosestoothpub/" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/moosestoothpub/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/moosestoothpub/">Moose&#039;s Tooth</a></blockquote></div>');
-
-  //var testData =  '<div style="width: 400px;"><div class="fb-page" data-href="https://www.facebook.com/moosestoothpub/" data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/moosestoothpub/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/moosestoothpub/">Moose&#039;s Tooth</a></blockquote></div></div>'
-
-  //divDataTarget.append(testData);
-}
-
-function fourSquare(marker, infowindow){
-  var divDataTarget = $('#divDataTarget');
+  infowindow.open(map, marker);
   var venueId = marker.id;
   var clientId = 'Y0S1CEMXG0MQ3PLIGD3MVBQYYJYWYLUGDFLCWJ5TWNBJ2DME';
   var clientSecret = '5VKYBZD1HFK5XYL2FUCPJQSY3QDSR0GALNWB2DNHDNPOMMO1';
-  //marker.setAnimation(google.maps.Animation.BOUNCE);
-
-
-  // Open info window first
-  //infowindow.open(map, marker);
 
   $.when($.ajax({
     async: true,
@@ -433,9 +398,19 @@ function fourSquare(marker, infowindow){
         infoWindowContent += '<br><br><i>Data Source: <a href="https://foursquare.com/">Foursquare</a></i></div>';
 
         //infowindow.setContent(infoWindowContent);
-        divDataTarget.append(infoWindowContent);
+        infowindow.setContent(infoWindowContent);
     }
   );
+}
+
+function facebookData(marker) {
+  var divDataTarget = $('#divDataTarget');
+  var getDataTarget = $('#getFbData').get(0);
+  divDataTarget.append('<div class="fb-page" data-href="https://www.facebook.com/moosestoothpub/" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/moosestoothpub/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/moosestoothpub/">Moose&#039;s Tooth</a></blockquote></div>');
+
+  //var testData =  '<div style="width: 400px;"><div class="fb-page" data-href="https://www.facebook.com/moosestoothpub/" data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/moosestoothpub/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/moosestoothpub/">Moose&#039;s Tooth</a></blockquote></div></div>'
+
+  //divDataTarget.append(testData);
 }
 
 // Error handling for Google Maps
