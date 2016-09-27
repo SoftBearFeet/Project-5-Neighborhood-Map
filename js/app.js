@@ -357,9 +357,16 @@ function mainInfowindow(marker, infowindow) {
   function fbLink(marker) {
       var facebookId = marker.fb;
       var locationTitle = marker.title;
-      var fbData = '<i><a href="' + facebookId + '" target= "_blank">' + locationTitle + "'s Facebook Page</a></i>"
-      return fbData;
-  }
+      //var fbData = '<i><a href="' + facebookId + '" target= "_blank">' + locationTitle + "'s Facebook Page</a></i>"
+
+        var modalButton = '<button type="button" class= "btn btn-primary btn-xs" data-toggle= "modal" data-target="#myModal">' + locationTitle + "'s Facebook Page</button>";
+
+        var modalBody = '<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title" id="myModalLabel">' + locationTitle + '</h4></div><div class="modal-body"><iframe src= ' + facebookId + '/></div><div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div></div></div></div>';
+
+        var modalData = modalButton + modalBody
+
+      return modalButton + modalBody;
+  };
 
   $.when($.ajax({
     async: true,
