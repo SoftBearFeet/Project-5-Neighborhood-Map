@@ -354,6 +354,13 @@ function mainInfowindow(marker, infowindow) {
   var clientId = 'Y0S1CEMXG0MQ3PLIGD3MVBQYYJYWYLUGDFLCWJ5TWNBJ2DME';
   var clientSecret = '5VKYBZD1HFK5XYL2FUCPJQSY3QDSR0GALNWB2DNHDNPOMMO1';
 
+  function fbLink(marker) {
+      var facebookId = marker.fb;
+      var locationTitle = marker.title;
+      var fbData = '<i><a href="' + facebookId + '" target= "_blank">' + locationTitle + "'s Facebook Page</a></i>"
+      return fbData;
+  }
+
   $.when($.ajax({
     async: true,
     cache: true,
@@ -396,6 +403,9 @@ function mainInfowindow(marker, infowindow) {
         }
 
         infoWindowContent += '<br><br><i>Data Source: <a href="https://foursquare.com/">Foursquare</a></i></div>';
+
+        //Adds Location's Facebook page
+        infoWindowContent += fbLink(marker);
 
         //infowindow.setContent(infoWindowContent);
         infowindow.setContent(infoWindowContent);
