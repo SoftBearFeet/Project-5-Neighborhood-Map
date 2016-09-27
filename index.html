@@ -77,5 +77,22 @@
     <!-- Async Request for Google Map API -->
     <script async src= "https://maps.googleapis.com/maps/api/js?key=AIzaSyDZqT7WKRP29IZHMwHIyB2zYluNNXf4kJs&callback=initMap">
     </script>
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '278624452494450',
+          xfbml      : true,
+          version    : 'v2.7'
+        });
+      };
+
+      (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    </script>
   </body>
 </html>
