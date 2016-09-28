@@ -36,7 +36,7 @@ var locations = [
     fbUrl: 'https://www.facebook.com/moosestoothpub/'
   },
   {
-    title: "SteamDot Coffee",
+    title: "SteamDot Coffee - on Northern Lights Blvd",
     lat: 61.1940085,
     long: -149.8757585,
     latLng: {lat: 61.1940085, lng: -149.8757585},
@@ -45,7 +45,7 @@ var locations = [
     fbUrl: 'https://www.facebook.com/SteamDotCoffeeCompany/'
   },
   {
-    title: "SteamDot Coffee",
+    title: "SteamDot Coffee - on Omalley Centre",
     lat: 61.121657,
     long: -149.862175,
     latLng: {lat: 61.121657, lng: -149.862175},
@@ -54,7 +54,7 @@ var locations = [
     fbUrl: 'https://www.facebook.com/SteamDotCoffeeCompany/'
   },
   {
-    title: "Kaladi Brothers Coffee",
+    title: "Kaladi Brothers Coffee - on W 6th Ave",
     lat: 61.216750,
     long: -149.895127,
     latLng: {lat: 61.216750, lng: -149.895127},
@@ -63,7 +63,7 @@ var locations = [
     fbUrl: 'https://www.facebook.com/KaladiBrothersCoffee/'
   },
   {
-    title: "Kaladi Brothers Coffee",
+    title: "Kaladi Brothers Coffee - on W Northern Lights Blvd",
     lat: 61.194508,
     long: -149.908376,
     latLng: {lat: 61.194508, lng: -149.908376},
@@ -72,7 +72,7 @@ var locations = [
     fbUrl: 'https://www.facebook.com/KaladiBrothersCoffee/'
   },
   {
-    title: "Kaladi Brothers Coffee",
+    title: "Kaladi Brothers Coffee - on E Tudor Rd",
     lat: 61.181485,
     long: -149.751496,
     latLng: {lat: 61.181485, lng: -149.751496},
@@ -81,7 +81,7 @@ var locations = [
     fbUrl: 'https://www.facebook.com/KaladiBrothersCoffee/'
   },
   {
-    title: "Kaladi Brothers Coffee",
+    title: "Kaladi Brothers Coffee - on Brayton Dr",
     lat: 61.158345,
     long: -149.853792,
     latLng: {lat: 61.158345, lng: -149.853792},
@@ -90,7 +90,7 @@ var locations = [
     fbUrl: 'https://www.facebook.com/KaladiBrothersCoffee/'
   },
   {
-    title: "Kaladi Brothers Coffee",
+    title: "Kaladi Brothers Coffee - Old Seward Hwy",
     lat: 61.131043,
     long: -149.865175,
     latLng: {lat: 61.131043, lng: -149.865175},
@@ -99,7 +99,7 @@ var locations = [
     fbUrl: 'https://www.facebook.com/KaladiBrothersCoffee/'
   },
   {
-    title: "Kaladi Brothers Coffee",
+    title: "Kaladi Brothers Coffee - on Industry Way",
     lat: 61.109212,
     long: -149.862310,
     latLng: {lat: 61.109212, lng: -149.862310},
@@ -226,7 +226,7 @@ var locations = [
   }
 ];
 
-
+// Function to conveter Location Data to ko.observable //
 var markMarker = function(data, marker) {
   this.marker = marker;
   this.title = ko.observable(data.title);
@@ -249,6 +249,7 @@ var ViewModel = function() {
 
   this.allLocations = ko.observableArray([]);
 
+  // Menu Button to Filter Locations //
   this.typeButton = function(type) {
 
     var filteredLocations = [];
@@ -278,9 +279,10 @@ var ViewModel = function() {
     };
   };
 
+  // Starting Point to populate map with markers //
   makingMarkers(locations);
 
-  // Clear markers on map
+  // Clear markers on map //
   function removeMarkers() {
       for (var i = 0; i < markerArray.length; i++) {
           markerArray[i].setMap(null);
@@ -314,9 +316,10 @@ var ViewModel = function() {
     };
   }
 
-  // Sets current location object
+  // Sets current location object //
   this.currentLocation = ko.observable(this.allLocations());
 
+  // Moves Google Map View to Clicked Marker Location //
   this.moveLocation = function(clickedLocation) {
 
     self.currentLocation(clickedLocation);
@@ -330,10 +333,10 @@ var ViewModel = function() {
 };
 
 
-
+// Main function to handle when a Marker is clicked //
 function markerClicked(marker, infowindow) {
 
-  // Set all markers animation from placeMarkers array to null to prevent multiple animated markers
+  // Set all markers animation from placeMarkers array to null to prevent multiple animated markers //
   for (var i = 0; i < markerArray.length; i++) {
       markerArray[i].setAnimation(null);
   }
@@ -343,10 +346,11 @@ function markerClicked(marker, infowindow) {
       marker.setAnimation(null);
   });
 
-   //If same marker is clicked again, then close it, otherwise obtain infowindow information and display it
+   //If same marker is clicked again, then close it, otherwise obtain infowindow information and display it //
   marker === infowindow.anchor ? infowindow.close() : mainInfowindow(marker, infowindow);
 };
 
+// Populates Info Window of clicked Marker //
 function mainInfowindow(marker, infowindow) {
   marker.setAnimation(google.maps.Animation.BOUNCE);
   infowindow.open(map, marker);
@@ -354,18 +358,12 @@ function mainInfowindow(marker, infowindow) {
   var clientId = 'Y0S1CEMXG0MQ3PLIGD3MVBQYYJYWYLUGDFLCWJ5TWNBJ2DME';
   var clientSecret = '5VKYBZD1HFK5XYL2FUCPJQSY3QDSR0GALNWB2DNHDNPOMMO1';
 
+  // A function which creates a button linking to the Location's Facebook Page //
   function fbLink(marker) {
       var facebookId = marker.fb;
       var locationTitle = marker.title;
-      //var fbData = '<i><a href="' + facebookId + '" target= "_blank">' + locationTitle + "'s Facebook Page</a></i>"
-
-        var modalButton = '<button type="button" class= "btn btn-primary btn-xs" data-toggle= "modal" data-target="#myModal">' + locationTitle + "'s Facebook Page</button>";
-
-        var modalBody = '<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title" id="myModalLabel">' + locationTitle + '</h4></div><div class="modal-body"><iframe src= ' + facebookId + '/></div><div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div></div></div></div>';
-
-        var modalData = modalButton + modalBody
-
-      return modalButton + modalBody;
+      var fbData = '<a href="' + facebookId + '" target= "_blank"><button type= "button" class= "btn btn-primary btn-xs">' + locationTitle + "'s Facebook Page</button></a>"
+      return fbData;
   };
 
   $.when($.ajax({
@@ -411,23 +409,13 @@ function mainInfowindow(marker, infowindow) {
 
         infoWindowContent += '<br><br><i>Data Source: <a href="https://foursquare.com/">Foursquare</a></i></div>';
 
-        //Adds Location's Facebook page
+        //Adds Location's Facebook page Link//
         infoWindowContent += fbLink(marker);
 
         //infowindow.setContent(infoWindowContent);
         infowindow.setContent(infoWindowContent);
     }
   );
-}
-
-function facebookData(marker) {
-  var divDataTarget = $('#divDataTarget');
-  var getDataTarget = $('#getFbData').get(0);
-  divDataTarget.append('<div class="fb-page" data-href="https://www.facebook.com/moosestoothpub/" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/moosestoothpub/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/moosestoothpub/">Moose&#039;s Tooth</a></blockquote></div>');
-
-  //var testData =  '<div style="width: 400px;"><div class="fb-page" data-href="https://www.facebook.com/moosestoothpub/" data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/moosestoothpub/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/moosestoothpub/">Moose&#039;s Tooth</a></blockquote></div></div>'
-
-  //divDataTarget.append(testData);
 }
 
 // Error handling for Google Maps
