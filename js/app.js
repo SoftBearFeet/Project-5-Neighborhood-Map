@@ -1,6 +1,5 @@
-// Global Variables //
 var infowindow,
-    markerArray = []
+    markerArray = [];
 
 
 // Callback function for Google Maps //
@@ -13,7 +12,7 @@ function initMap() {
   infowindow = new google.maps.InfoWindow();
 
   ko.applyBindings(new ViewModel());
-};
+}
 
 // Data for Locations //
 var locations = [
@@ -275,9 +274,9 @@ var ViewModel = function() {
         var location = locationData[i];
         if (location.type === type) {
           filteredLocations.push(location);
-        };
-      };
-    };
+        }
+      }
+    }
   };
 
   // Starting Point to populate map with markers //
@@ -289,7 +288,7 @@ var ViewModel = function() {
           markerArray[i].setMap(null);
       }
       markerArray = [];
-  };
+  }
 
   function makingMarkers(locationData, type) {
 
@@ -314,7 +313,7 @@ var ViewModel = function() {
       markerArray.push(marker);
 
       self.allLocations.push(new markMarker(locations, marker));
-    };
+    }
   }
 
   // Sets current location object //
@@ -349,7 +348,7 @@ function markerClicked(marker, infowindow) {
 
    //If same marker is clicked again, then close it, otherwise obtain infowindow information and display it //
   marker === infowindow.anchor ? infowindow.close() : mainInfowindow(marker, infowindow);
-};
+}
 
 // Populates Info Window of clicked Marker //
 function mainInfowindow(marker, infowindow) {
@@ -363,16 +362,16 @@ function mainInfowindow(marker, infowindow) {
   function fbLink(marker) {
       var facebookId = marker.fb;
       var locationTitle = marker.title;
-      var fbData = '<a href="' + facebookId + '" target= "_blank"><button type= "button" class= "btn btn-primary btn-xs">' + locationTitle + "'s Facebook Page</button></a>"
+      var fbData = '<a href="' + facebookId + '" target= "_blank"><button type= "button" class= "btn btn-primary btn-xs">' + locationTitle + "'s Facebook Page</button></a>";
       return fbData;
-  };
+  }
 
   $.when($.ajax({
     async: true,
     cache: true,
     url: 'https://api.foursquare.com/v2/venues/' + venueId + '?client_id=' + clientId + '&client_secret=' + clientSecret + '&v=20160801',
     error: function() {
-      alert('some shit broke during the ajax request for FourSquare');
+      alert('There was a goof with sending a request to FourSquare, Sorry.');
     }
   })).done(function(data){
       var locationPhoto = data.response.venue.photos.groups[0].items[0].prefix + '250x160' + data.response.venue.photos.groups[0].items[0].suffix;
