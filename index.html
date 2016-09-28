@@ -54,6 +54,8 @@
             <button id= 'restaurant' data-bind= 'click: function() {this.typeButton("restaurant")}'>Restaurants</button>
             <button id= 'all' data-bind= 'click: function() {this.typeButton("all")}'>All</button>
             <li class="divider"></li>
+
+            <!-- Creates List of Location Titles -->
             <div data-bind= 'foreach: allLocations'>
               <div data-bind= 'text: marker.title, click: function() {markerClicked(marker, infowindow)}'></div>
             </div>
