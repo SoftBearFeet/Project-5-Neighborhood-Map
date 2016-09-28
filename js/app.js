@@ -132,7 +132,7 @@ var locations = [
     latLng: {lat: 61.1817417, lng: -149.9349547},
     venueId: '4b67ffb4f964a5206a632be3',
     type: 'restaurant',
-    fbUrl: 'https://www.facebook.com/pages/Gwennies-Old-Alaska-Restaurant'
+    fbUrl: 'https://www.facebook.com/pages/Gwennies-Old-Alaska-Restaurant/111592442214586'
   },
   {
     title: "Crow's Nest",
@@ -177,7 +177,7 @@ var locations = [
     latLng: {lat: 61.195929, lng: -149.907275},
     venueId: '4b47b7f5f964a520c23b26e3',
     type: 'restaurant',
-    fbUrl: 'https://www.facebook.com/moosestoothpub/'
+    fbUrl: 'https://www.facebook.com/beartoothak/'
   },
   {
     title: "Pho Lena",
@@ -185,7 +185,8 @@ var locations = [
     long: -149.907432,
     latLng: {lat: 61.189904, lng: -149.907432},
     venueId: '4b490c52f964a520946326e3',
-    type: 'restaurant'
+    type: 'restaurant',
+    fbUrl: 'https://www.facebook.com/Pho-Lena-115247161831041'
   },
   {
     title: "Samurai Sushi",
