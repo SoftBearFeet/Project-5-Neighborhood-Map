@@ -226,16 +226,9 @@ var locations = [
   }
 ];
 
-// Function to conveter Location Data to ko.observable //
-var markMarker = function(data, marker) {
+// Function to conveter Marker Data to ko.observable //
+var trackMarker = function(marker) {
   this.marker = marker;
-  this.title = ko.observable(data.title);
-  this.lat = ko.observable(data.lat);
-  this.long = ko.observable(data.long);
-  this.latLng = ko.observable(data.latLng);
-  this.placeId = ko.observable(data.venueId);
-  this.type = ko.observable(data.type);
-  this.fb = ko.observable(data.fbUrl);
 };
 
 
@@ -245,9 +238,9 @@ var ViewModel = function() {
 
   var self = this;
 
-  self.markerArray = ko.observableArray([]);
+  // self.markerArray = ko.observableArray([]);
 
-  this.allLocations = ko.observableArray([]);
+  this.allLocations = ko.observableArray();
 
   // Menu Button to Filter Locations //
   this.typeButton = function(type) {
@@ -256,18 +249,19 @@ var ViewModel = function() {
 
     self.allLocations.removeAll();
 
-    removeMarkers();
+    hideMarker();
 
     if (type === 'coffee') {
-      filter(locations, type);
-      makingMarkers(filteredLocations);
+      filter(markerArray, type);
+      setOnMap(filteredLocations);
     } if (type === 'restaurant') {
-      filter(locations, type);
-      makingMarkers(filteredLocations);
+      filter(markerArray, type);
+      setOnMap(filteredLocations);
     } if (type === 'all') {
-      makingMarkers(locations);
+      setOnMap(markerArray);
     }
 
+    // Filters through the markerArray and finds the matching marker type and pushes the data to 'filteredLocations' array //
     function filter(locationData, type) {
       filteredLocations = [];
       for (var i = 0; i < locationData.length; i++) {
@@ -277,17 +271,33 @@ var ViewModel = function() {
         }
       }
     }
+
+    // Takes locationData and adds data to marker object. Then pushes marker object trackMarker and pushes it to 'self.allLocations' array.
+    function reCreate(locationData){
+
+      var marker = locationData;
+
+      self.allLocations.push(new trackMarker(marker));
+    }
+
+    // Shows filtered markers on the Map & List//
+    function setOnMap(locationData, marker) {
+      for (var i = 0; i < locationData.length; i++) {
+        var location = locationData[i]
+        location.setVisible(true);
+        reCreate(location);
+      }
+    }
   };
 
   // Starting Point to populate map with markers //
   makingMarkers(locations);
 
-  // Clear markers on map //
-  function removeMarkers() {
+  // Hides markers on map //
+  function hideMarker() {
       for (var i = 0; i < markerArray.length; i++) {
-          markerArray[i].setMap(null);
+          markerArray[i].setVisible(false);
       }
-      markerArray = [];
   }
 
   function makingMarkers(locationData, type) {
@@ -311,8 +321,7 @@ var ViewModel = function() {
       });
 
       markerArray.push(marker);
-
-      self.allLocations.push(new markMarker(locations, marker));
+      self.allLocations.push(new trackMarker(marker));
     }
   }
 
@@ -326,7 +335,7 @@ var ViewModel = function() {
 
     var centerMarker = self.currentLocation().marker;
     var center = centerMarker.getPosition();
-    map.setCenter(center);
+    map.panTo(center);
 
     markerClicked(self.currentLocation().marker, infowindow);
   };
@@ -353,6 +362,7 @@ function markerClicked(marker, infowindow) {
 // Populates Info Window of clicked Marker //
 function mainInfowindow(marker, infowindow) {
   marker.setAnimation(google.maps.Animation.BOUNCE);
+  infowindow.setContent(); 
   infowindow.open(map, marker);
   var venueId = marker.id;
   var clientId = 'Y0S1CEMXG0MQ3PLIGD3MVBQYYJYWYLUGDFLCWJ5TWNBJ2DME';
